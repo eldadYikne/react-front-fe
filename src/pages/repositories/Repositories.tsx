@@ -23,7 +23,6 @@ export default function Repositories(props: RepositoryProps) {
           "http://localhost:3001/repositories"
         ).then((res) => res.json());
         let newRepositories: TableData[] = repositoryData.map((repository) => {
-          console.log("size", repository.size);
           return {
             id: repository.id,
             name: repository.name,
@@ -38,14 +37,12 @@ export default function Repositories(props: RepositoryProps) {
           );
         }
         setRepositories(newRepositories);
-        console.log("newRepositories", newRepositories);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
     };
 
     fetchImages();
-    console.log("props", props);
   }, [id, props]);
 
   return (

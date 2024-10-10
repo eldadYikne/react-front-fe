@@ -56,11 +56,7 @@ function App() {
             }
           });
         });
-        console.log("images", imagesResponse);
-        console.log("repositories", repositoriesResponse);
-        console.log("connections", connectionsResponse);
-        console.log("imgToRepository", imgToRepository);
-        console.log("repositoryToImag", repositoryToImag);
+
         if (imgToRepository && repositoryToImag) {
           setImageToRepository(imgToRepository);
           setRepositoryToImage(repositoryToImag);

@@ -26,7 +26,7 @@ export default function Table(props: TableProps) {
       <tbody>
         {props.data.map((row: TableData, index) => {
           return (
-            <tr onClick={() => onNavigate(row)} key={index}>
+            <tr key={index}>
               {Object.keys(row).map((key) => {
                 return (
                   key !== "id" && (
@@ -49,7 +49,16 @@ export default function Table(props: TableProps) {
                         ) : (
                           "-"
                         ))}
-                      {row[key as keyof TableData]}
+                      {key === "repositoryName" || key === "imageName" ? (
+                        <span
+                          className={styles.link}
+                          onClick={() => onNavigate(row)}
+                        >
+                          {row[key as keyof TableData]}
+                        </span>
+                      ) : (
+                        <span>{row[key as keyof TableData]}</span>
+                      )}
                     </td>
                   )
                 );

@@ -36,15 +36,12 @@ export default function Images(props: ImagesProps) {
           newImages = newImages.filter((image) => image.id === id);
         }
         setImages(newImages);
-
-        console.log("newImages", newImages);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
     };
 
     fetchImages();
-    console.log("props", props);
   }, [id, props]);
 
   return (
