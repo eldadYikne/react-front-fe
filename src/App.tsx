@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Images from "./pages/images/Images";
-import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Repositories from "./pages/repositories/Repositories";
 import Footer from "./components/footer/Footer";
