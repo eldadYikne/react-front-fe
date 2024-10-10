@@ -1,36 +1,47 @@
 import { useEffect, useState } from "react";
 import styles from "./images.module.scss";
+import { ImageData, ImagesProps } from "../../types/image";
+import Table from "../../components/table/Table";
+import { TableData, ThTable } from "../../types/table";
+import { getCurrentDate } from "../../utils";
 
-export default function Images() {
-  const [images, setImages] = useState<any>(null);
+export default function Images(props: ImagesProps) {
+  const thImagesTable: ThTable[] = [
+    "Name",
+    "Created At",
+    "Repository Name",
+    "Severity",
+  ];
+  const [images, setImages] = useState<TableData[]>();
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:3001/images");
-        const data = await response.json();
-        setImages(data);
+        const imagesResponse: ImageData[] = await fetch(
+          "http://localhost:3001/images"
+        ).then((res) => res.json());
+        const newImages: TableData[] = imagesResponse.map((image) => {
+          return {
+            name: image.name,
+            createdAt: getCurrentDate(image.created_date_timestamp),
+            repositoryName: props.imageToRepository[image.id],
+            severity: image.highest_severity,
+          };
+        });
+        setImages(newImages);
+        console.log("newImages", newImages);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
     };
 
     fetchImages();
-    console.log(images);
+    console.log("props", props);
   }, []);
 
   return (
-    <div>
-      <h1>Images</h1>
-      <ul>
-        {images &&
-          images.map((image: any) => (
-            <li key={image.id}>
-              <img src={image.url} alt={image.description} />
-              <p>{image.description}</p>
-            </li>
-          ))}
-      </ul>
+    <div className={styles["images-container"]}>
+      {images && <Table data={images} th={thImagesTable} />}{" "}
     </div>
   );
 }

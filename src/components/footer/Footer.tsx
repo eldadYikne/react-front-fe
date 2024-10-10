@@ -1,4 +1,3 @@
-import { lazy } from "react";
 import { footerLink } from "../../types/footer";
 import styles from "./footer.module.scss";
 
