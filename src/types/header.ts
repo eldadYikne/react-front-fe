@@ -3,4 +3,4 @@ export interface HeaderLink {
   text: HeaderTextLink;
 }
 
-type HeaderTextLink = "Home" | "Images" | "Repositories";
+type HeaderTextLink = "Images" | "Repositories";

@@ -11,11 +11,16 @@ export type ThTable =
   | "Size";
 
 export interface TableData {
+  id: string;
   name: string;
   createdAt: string;
   imageName?: string;
   size?: string;
   repositoryName?: string;
-  //   severity?: 'high'|'medium'|'low';
-  severity?: string;
+  severity?: Severity | "";
 }
+
+export type SeverityColor = {
+  [Key in Severity]: "#f88610" | "#156daa" | "#f83910";
+};
+type Severity = "high" | "medium" | "low";

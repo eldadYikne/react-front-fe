@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Images from "./pages/images/Images";
 import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
@@ -73,20 +73,27 @@ function App() {
     fetchData();
   }, []);
 
-  useEffect(() => {}, []);
-
   return (
     <div className="site-container">
       <div className="content-wrap">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Navigate to="/images" />} />
           <Route
             path="/images"
             element={<Images imageToRepository={imageToRepository} />}
           />
           <Route
+            path="/images/:id"
+            element={<Images imageToRepository={imageToRepository} />}
+          />
+
+          <Route
             path="/repositories"
+            element={<Repositories repositoryToImage={repositoryToImage} />}
+          />
+          <Route
+            path="/repositories/:id"
             element={<Repositories repositoryToImage={repositoryToImage} />}
           />
         </Routes>

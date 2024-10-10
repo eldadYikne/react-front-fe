@@ -5,18 +5,16 @@ import { useState } from "react";
 
 export default function Header() {
   const links: HeaderLink[] = [
-    { text: "Home", href: "home" },
     { text: "Images", href: "images" },
     { text: "Repositories", href: "repositories" },
   ];
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const location: Location = useLocation();
-
   return (
     <div className={styles["header-container"]}>
       <div className={styles["title"]}>
         {location.pathname.substring(1).charAt(0).toUpperCase() +
-          location.pathname.substring(2)}
+          location.pathname.substring(2).split("/")[0]}
       </div>
       <nav
         className={`${styles["nav-links-container"]} ${
@@ -30,7 +28,7 @@ export default function Header() {
               key={link.href}
               to={`/${link.href}`}
               style={({ isActive }) => ({
-                color: isActive ? "#57f8bb" : "white",
+                color: isActive ? "#57f8bb " : "white",
               })}
               onClick={() => {
                 setMenuOpen(false);
